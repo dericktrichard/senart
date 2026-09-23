@@ -10,13 +10,13 @@ type VantaEffect = {
 };
 
 const DESKTOP_OPTIONS = {
-  birdSize: 0.7,
-  wingSpan: 18,
+  birdSize: 1.0,
+  wingSpan: 20,
   speedLimit: 2.5,
-  separation: 55,
+  separation: 50,
   alignment: 25,
   cohesion: 20,
-  quantity: 2,
+  quantity: 3,
 };
 
 const MOBILE_OPTIONS = {
@@ -80,8 +80,8 @@ export function AtmosphericBackground() {
 
         backgroundColor: 0x050505,
 
-        color1: 0x252525,
-        color2: 0x666666,
+        color1: 0x555555,
+        color2: 0xb0b0b0,
 
         ...options,
       });
