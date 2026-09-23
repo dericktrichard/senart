@@ -23,21 +23,21 @@ export default function Home() {
           <div className={styles.intro}>
             <p>Remote work marketplace</p>
 
-            <h1>What are you here to do?</h1>
+            <h1>Choose you Need</h1>
           </div>
 
           <div className={styles.actions}>
             <ActionCard
               number="01"
               title="Post a job"
-              description="Need something done remotely?"
+              description="Have something that needs doing?"
               href="/post"
             />
 
             <ActionCard
               number="02"
               title="Find a job"
-              description="Have the skills?"
+              description="Have the skills to offer?"
               href="/jobs"
             />
           </div>

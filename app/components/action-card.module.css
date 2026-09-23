@@ -7,11 +7,7 @@
   padding: 1.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
-  background: color-mix(
-    in srgb,
-    var(--surface) 88%,
-    transparent
-  );
+  background: rgb(10 10 10 / 94%);
   color: var(--foreground);
   text-decoration: none;
   isolation: isolate;
@@ -24,11 +20,7 @@
 .card:hover {
   transform: translateY(-0.25rem);
   border-color: var(--border-strong);
-  background: color-mix(
-    in srgb,
-    var(--surface-hover) 92%,
-    transparent
-  );
+  background: rgb(14 14 14 / 96%);
 }
 
 .card:focus-visible {
@@ -113,7 +105,7 @@
 
 @media (max-width: 767px) {
   .card {
-    min-height: 11.5rem;
+    min-height: 10.5rem;
     padding: 1.35rem;
     border-radius: var(--radius-card-mobile);
   }
@@ -123,8 +115,9 @@
   }
 
   .content p {
-    max-width: 15rem;
+    max-width: 16rem;
     font-size: 0.8125rem;
+    line-height: 1.5;
   }
 
   .arrow {
@@ -139,6 +132,20 @@
     right: -4rem;
     width: 9rem;
     height: 9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .card {
+    min-height: 9.75rem;
+  }
+
+  .content h2 {
+    font-size: 1.8rem;
+  }
+
+  .content p {
+    max-width: 14rem;
   }
 }
 
