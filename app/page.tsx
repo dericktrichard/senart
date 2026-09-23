@@ -1,8 +1,6 @@
 import Link from "next/link";
-
 import { ActionCard } from "./components/action-card";
 import { AtmosphericBackground } from "./components/atmospheric-background";
-
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -32,14 +30,14 @@ export default function Home() {
             <ActionCard
               number="01"
               title="Post a job"
-              description="Need something done remotely? Put the task out there."
+              description="Need something done remotely?"
               href="/post"
             />
 
             <ActionCard
               number="02"
               title="Find a job"
-              description="Have the skills? Find work that fits and get paid."
+              description="Have the skills?"
               href="/jobs"
             />
           </div>
