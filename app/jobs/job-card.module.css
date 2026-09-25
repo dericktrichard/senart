@@ -1,122 +1,200 @@
 .card {
+  --folder-radius: 1rem;
+
   position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 15rem;
-  padding: 1.5rem;
+
+  display: block;
+
+  height: 15.5rem;
+
   overflow: hidden;
 
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 0 var(--folder-radius) var(--folder-radius)
+    var(--folder-radius);
 
-  background: rgb(10 10 10 / 94%);
+  background: var(--surface);
+
   color: var(--foreground);
   text-decoration: none;
 
   isolation: isolate;
 
   transition:
-    transform 250ms ease,
-    border-color 250ms ease,
-    background-color 250ms ease;
+    transform 260ms ease,
+    border-color 220ms ease;
+}
+
+.card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 45%;
+  height: 1.65rem;
+
+  content: "";
+
+  border-right: 1px solid rgb(255 255 255 / 8%);
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 0 0.6rem 0.6rem 0;
+
+  background: rgb(18 18 18 / 96%);
+
+  z-index: 2;
 }
 
 .card:hover {
-  transform: translateY(-0.2rem);
-  border-color: var(--border-strong);
-  background: rgb(14 14 14 / 97%);
+  transform: translateY(-0.25rem) rotate(-0.25deg);
+  border-color: rgb(255 255 255 / 18%);
 }
 
-.top,
+.image {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgb(5 5 5 / 30%),
+      rgb(5 5 5 / 88%)
+    ),
+    var(--job-image);
+
+  background-position: center;
+  background-size: cover;
+
+  filter: blur(4px);
+  transform: scale(1.08);
+
+  opacity: 0.5;
+
+  z-index: -1;
+}
+
+.tab {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.7rem;
+
+  z-index: 3;
+
+  max-width: 38%;
+
+  overflow: hidden;
+
+  color: var(--muted);
+
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  padding: 2.65rem 1rem 0.85rem;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  color: rgb(245 245 245 / 50%);
+
+  font-size: 0.58rem;
+  white-space: nowrap;
+}
+
+.meta span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content h2 {
+  min-width: 0;
+
+  margin: auto 0;
+
+  overflow: hidden;
+
+  font-family: var(--font-philosopher), serif;
+  font-size: clamp(1.2rem, 1.55vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.05;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem;
+
+  padding-top: 0.7rem;
+
+  border-top: 1px solid rgb(255 255 255 / 10%);
 }
 
-.top {
-  color: var(--muted);
-  font-size: 0.75rem;
-}
-
-.category {
-  color: var(--foreground);
-}
-
-.body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.65rem;
-  padding-block: 2rem;
-}
-
-.body h2 {
-  max-width: 34rem;
-  margin: 0;
-  font-family: var(--font-philosopher), serif;
-  font-size: clamp(1.35rem, 2vw, 1.75rem);
-  font-weight: 400;
-  line-height: 1.15;
-}
-
-.body p {
-  max-width: 38rem;
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-}
-
-.bottom {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.budget {
-  font-size: 0.9rem;
-  font-weight: 700;
+.bottom strong {
+  font-size: 0.78rem;
 }
 
 .deadline {
-  margin-left: auto;
+  font-size: 0.62rem;
+}
+
+.urgent {
+  color: #f0a0a0;
+}
+
+.soon {
+  color: #d8c58c;
+}
+
+.normal {
   color: var(--muted);
-  font-size: 0.8rem;
 }
 
-.arrow {
-  font-size: 1.1rem;
-  transition: transform 250ms ease;
+.urgency {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 2px;
+
+  background: currentColor;
+
+  opacity: 0.65;
 }
 
-.card:hover .arrow {
-  transform: translateX(0.25rem);
-}
-
-@media (max-width: 640px) {
+@media (max-width: 1100px) {
   .card {
-    min-height: 13rem;
-    padding: 1.25rem;
-    border-radius: var(--radius-card-mobile);
+    height: 15rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .content h2 {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .card {
+    height: 13.5rem;
   }
 
-  .body {
-    padding-block: 1.5rem;
-  }
-
-  .body p {
-    font-size: 0.85rem;
-  }
-
-  .deadline {
-    display: none;
+  .content {
+    padding-inline: 0.9rem;
   }
 }
