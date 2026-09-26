@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
 import { AtmosphericBackground } from "@/app/components/atmospheric-background";
-
 import {
+  daysUntil,
   formatCurrency,
   formatDate,
   getJobById,
 } from "@/lib/jobs";
-
 import styles from "./job-details.module.css";
 
 type JobDetailsPageProps = {
@@ -27,6 +25,15 @@ export default async function JobDetailsPage({
     notFound();
   }
 
+  const remaining = daysUntil(job.deadline);
+
+  const deadlineLabel =
+    remaining <= 0
+      ? "Closing"
+      : remaining === 1
+        ? "1 day left"
+        : `${remaining} days left`;
+
   return (
     <main className={styles.page}>
       <AtmosphericBackground />
@@ -35,69 +42,65 @@ export default async function JobDetailsPage({
         <header className={styles.header}>
           <Link href="/jobs" className={styles.back}>
             <span aria-hidden="true">←</span>
-            Browse jobs
+            <span>Back to jobs</span>
           </Link>
 
-          <Link href="/" className={styles.logo}>
-            Senart
+          <Link href="/post" className={styles.post}>
+            + Post a job
           </Link>
         </header>
 
-        <div className={styles.content}>
-          <section className={styles.main}>
-            <div className={styles.meta}>
-              <span>{job.category}</span>
-              <span>Posted {formatDate(job.postedAt)}</span>
-            </div>
+        <section className={styles.layout}>
+          <div className={styles.visual}>
+            <img
+              src={job.image}
+              alt=""
+              className={styles.image}
+            />
 
-            <h1>{job.title}</h1>
+            <div className={styles.imageOverlay}>
+              <span>{job.category}</span>
+              <span>{deadlineLabel}</span>
+            </div>
+          </div>
+
+          <article className={styles.content}>
+            <div className={styles.heading}>
+              <span className={styles.category}>
+                {job.category}
+              </span>
+
+              <h1>{job.title}</h1>
+
+              <div className={styles.meta}>
+                <span>Posted {formatDate(job.postedAt)}</span>
+                <span>Deadline {formatDate(job.deadline)}</span>
+              </div>
+            </div>
 
             <div className={styles.description}>
+              <h2>What needs doing</h2>
               <p>{job.description}</p>
-
-              <p>
-                The worker will be expected to communicate through Senart
-                and provide the agreed deliverable before the deadline.
-              </p>
             </div>
-          </section>
 
-          <aside className={styles.sidebar}>
-            <div className={styles.summary}>
-              <div className={styles.summaryRow}>
+            <div className={styles.footer}>
+              <div className={styles.budget}>
                 <span>Budget</span>
                 <strong>{formatCurrency(job.budget)}</strong>
               </div>
 
-              <div className={styles.summaryRow}>
-                <span>Deadline</span>
-                <strong>{formatDate(job.deadline)}</strong>
-              </div>
-
-              <div className={styles.summaryRow}>
-                <span>Work type</span>
-                <strong>Remote</strong>
+              <div className={styles.action}>
+                <Link
+                  href={`/login?next=/jobs/${job.id}`}
+                  className={styles.apply}
+                >
+                  Apply for this job
+                  <span aria-hidden="true">→</span>
+                </Link>
               </div>
             </div>
-
-            <Link
-              href={`/login?next=/jobs/${job.id}`}
-              className={styles.apply}
-            >
-              Apply for this job
-              <span aria-hidden="true">→</span>
-            </Link>
-
-            <p className={styles.note}>
-              You&apos;ll need a Senart account to apply. Browsing jobs does
-              not require an account.
-            </p>
-          </aside>
-        </div>
-
-        <footer className={styles.footer}>
-          <Link href="/jobs">← Back to jobs</Link>
-        </footer>
+          </article>
+        </section>
       </div>
     </main>
   );
