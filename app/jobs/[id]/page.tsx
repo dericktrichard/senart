@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AtmosphericBackground } from "@/app/components/atmospheric-background";
@@ -52,9 +53,12 @@ export default async function JobDetailsPage({
 
         <section className={styles.layout}>
           <div className={styles.visual}>
-            <img
+            <Image
               src={job.image}
               alt=""
+              fill
+              priority
+              sizes="(max-width: 600px) 100vw, (max-width: 800px) 45vw, 55vw"
               className={styles.image}
             />
 
@@ -91,7 +95,7 @@ export default async function JobDetailsPage({
 
               <div className={styles.action}>
                 <Link
-                  href={`/login?next=/jobs/${job.id}`}
+                  href={`/login?next=/jobs/${job.id}/apply`}
                   className={styles.apply}
                 >
                   Apply for this job
